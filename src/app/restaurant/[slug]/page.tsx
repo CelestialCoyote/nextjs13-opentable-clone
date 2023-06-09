@@ -1,20 +1,12 @@
+import Link from "next/link";
+import NavBar from "@/app/components/NavBar";
+
+
 export default function RestaurantDetails() {
 	return (
 		<main className="bg-gray-100 min-h-screen w-screen">
 			<main className="max-w-screen-2xl m-auto bg-white">
-				<nav className="bg-white p-2 flex justify-between">
-					<a href="" className="font-bold text-gray-700 text-2xl">
-						{" "} OpenTable{" "}
-					</a>
-					<div>
-						<div className="flex">
-							<button className="bg-blue-400 text-white border p-1 px-4 rounded mr-3">
-								Sign in
-							</button>
-							<button className="border p-1 px-4 rounded">Sign up</button>
-						</div>
-					</div>
-				</nav>
+				<NavBar />
 				<div className="h-96 overflow-hidden">
 					<div
 						className="bg-center bg-gradient-to-r from-[#0f1f47] to-[#5f6984] h-full flex justify-center items-center">
@@ -26,11 +18,21 @@ export default function RestaurantDetails() {
 				<div className="flex m-auto w-2/3 justify-between items-start 0 -mt-11">
 					<div className="bg-white w-[70%] rounded p-3 shadow">
 						<nav className="flex text-reg border-b pb-2">
-							<a href="" className="mr-7"> Overview </a>
-							<a href="" className="mr-7"> Menu </a>
+							<Link
+								href="/restaurant/milestones-grill"
+								className="mr-7"
+							>
+								Overview
+							</Link>
+							<Link
+								href="/restaurant/milestones-grill/menu"
+								className="mr-7"
+							>
+								Menu
+							</Link>
 						</nav>
 						<div className="mt-4 border-b pb-6">
-							<h1 className="font-bold text-6xl">Milesstone Grill</h1>
+							<h1 className="font-bold text-6xl">Milestones Grill</h1>
 						</div>
 						<div className="flex items-end">
 							<div className="ratings mt-2 flex items-center">
