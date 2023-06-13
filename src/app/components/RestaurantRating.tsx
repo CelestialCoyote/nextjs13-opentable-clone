@@ -1,6 +1,7 @@
 import { calculateReviewRatingsAverage } from "@/utilities/calculateReviewRatingAverage";
 import { Review } from "@prisma/client";
 import { calculateOverrideValues } from "next/dist/server/font-utils";
+import Stars from "./Stars";
 
 
 export default function RestaurantRating({
@@ -11,7 +12,7 @@ export default function RestaurantRating({
 	return (
 		<div className="flex items-end">
 			<div className="ratings mt-2 flex items-center">
-				<p>*****</p>
+				<Stars reviews={reviews} />
 				<p className="text-reg ml-3">
 					{calculateReviewRatingsAverage(reviews).toFixed(1)}
 				</p>
