@@ -23,12 +23,27 @@ export default function AuthModal({
 }: {
 	isSignIn: boolean
 }) {
+	const [inputs, setInputs] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		phone: "",
+		city: "",
+		password: ""
+	});
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
 	const renderContent = (signInContent: string, signUpContent: string) => {
 		return isSignIn ? signInContent : signUpContent;
+	}
+
+	const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setInputs({
+			...inputs,
+			[e.target.name]: e.target.value
+		})
 	}
 
 	return (
@@ -56,7 +71,11 @@ export default function AuthModal({
 							<h2 className="text-2xl font-light text-center">
 								{renderContent("Log Into Account", "Create Open Table Account")}
 							</h2>
-							<AuthModalInputs />
+							<AuthModalInputs
+								inputs={inputs}
+								handleChangeInput={handleChangeInput}
+								isSignIn={isSignIn}
+							/>
 							<button className="uppercase bg-red-600 w-full tex-white p-3 rounded text-sm disabled:bg-gray-400">
 								{renderContent("Sign In", "Create Account")}
 							</button>
