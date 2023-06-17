@@ -29,7 +29,7 @@ export default function AuthModalInputs({ inputs, handleChangeInput, isSignIn }:
 						className="border rounded p-2 py-3 w[49%]"
 						placeholder="Last Name"
 						value={inputs.lastName}
-						name="lasttName"
+						name="lastName"
 						onChange={handleChangeInput}
 					/>
 				</div>

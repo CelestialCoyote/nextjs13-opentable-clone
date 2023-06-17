@@ -1,10 +1,11 @@
 "use client";
 
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import AuthModalInputs from './AuthModalInputs';
+import useAuth from '../../../hooks/useAuth';
 
 
 const style = {
@@ -31,20 +32,41 @@ export default function AuthModal({
 		city: "",
 		password: ""
 	});
+
+	const [disabled, setDisabled] = useState(true);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+	const { signin } = useAuth();
 
 	const renderContent = (signInContent: string, signUpContent: string) => {
 		return isSignIn ? signInContent : signUpContent;
-	}
+	};
 
 	const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setInputs({
 			...inputs,
 			[e.target.name]: e.target.value
-		})
-	}
+		});
+	};
+
+	const handleClick = () => {
+		if (isSignIn) {
+			signin({ email: inputs.email, password: inputs.password });
+		};
+	};
+
+	useEffect(() => {
+		if (isSignIn) {
+			if (inputs.email && inputs.password)
+				return setDisabled(false);
+		} else {
+			if (inputs.firstName && inputs.lastName && inputs.email && inputs.phone && inputs.city && inputs.password)
+			return setDisabled(false);
+		}
+
+		setDisabled(true);
+	}, [inputs]);
 
 	return (
 		<div>
@@ -76,7 +98,11 @@ export default function AuthModal({
 								handleChangeInput={handleChangeInput}
 								isSignIn={isSignIn}
 							/>
-							<button className="uppercase bg-red-600 w-full tex-white p-3 rounded text-sm disabled:bg-gray-400">
+							<button
+								className="uppercase bg-red-600 w-full tex-white p-3 rounded text-sm disabled:bg-gray-400"
+								disabled={disabled}
+								onClick={handleClick}
+							>
 								{renderContent("Sign In", "Create Account")}
 							</button>
 						</div>
