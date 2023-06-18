@@ -39,7 +39,7 @@ export default function AuthModal({
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-	const { signin } = useAuth();
+	const { signin, signup } = useAuth();
 	const { loading, error, data } = useContext(AuthenticationContext);
 
 	const renderContent = (signInContent: string, signUpContent: string) => {
@@ -56,6 +56,8 @@ export default function AuthModal({
 	const handleClick = () => {
 		if (isSignIn) {
 			signin({ email: inputs.email, password: inputs.password }, handleClose);
+		} else {
+			signup(inputs, handleClose);
 		};
 	};
 

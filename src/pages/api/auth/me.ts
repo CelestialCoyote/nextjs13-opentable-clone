@@ -28,10 +28,22 @@ export default async function handler(
 			first_name: true,
 			last_name: true,
 			email: true,
-			city: true,
 			phone: true,
+			city: true,
 		}
 	});
 
-	return res.json({ user });
+	if (!user) {
+		return res.status(401).json({
+			errorMessage: "User not found."
+		});
+	};
+
+	return res.json({
+		id: user?.id,
+		firstName: user.first_name,
+		lastName: user.last_name,
+		phone: user.phone,
+		city: user.city,
+	});
 };
