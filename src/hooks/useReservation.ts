@@ -49,6 +49,7 @@ export default function useReservation() {
 					}
 				});
 			setLoading(false);
+			
 			return response.data;
 		} catch (error: any) {
 			setLoading(false);
